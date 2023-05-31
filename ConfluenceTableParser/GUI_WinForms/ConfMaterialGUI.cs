@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace ConfluenceTableParser
 {
-    public partial class Form1 : Form
+    public partial class ConfMaterialGUI : Form
     {
-        public Form1()
+        public ConfMaterialGUI()
         {
             InitializeComponent();
+        }
+
+        private void GetDataButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void JSONExportButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

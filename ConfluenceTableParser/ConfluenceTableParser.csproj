@@ -65,17 +65,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI_WinForms\Form1.cs">
+    <Compile Include="GUI_WinForms\ConfMaterialGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI_WinForms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GUI_WinForms\ConfMaterialGUI.Designer.cs">
+      <DependentUpon>ConfMaterialGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfluenceTableParser\MyParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MaterialData\UsageMaterial.cs" />
     <Compile Include="MaterialData\UsageMaterialStorage.cs" />
+    <EmbeddedResource Include="GUI_WinForms\ConfMaterialGUI.resx">
+      <DependentUpon>ConfMaterialGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -98,6 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\ipb_logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
