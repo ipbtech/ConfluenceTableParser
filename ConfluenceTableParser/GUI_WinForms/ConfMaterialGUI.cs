@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Windows.Forms;
 
 namespace ConfluenceTableParser
 {
     public partial class ConfMaterialGUI : Form
     {
+        private UsageMaterialStorage materialStorage;
         public ConfMaterialGUI()
         {
             InitializeComponent();
+            materialStorage = null;
         }
 
         private void GetDataButton_Click(object sender, EventArgs e)
         {
+            DataGridMaterialView.Rows.Clear();
+
             UsageMaterialStorage usageMaterials = MyParser.GetDataTable();
-            if (usageMaterials.Count() == 0)
+            materialStorage = usageMaterials;
+            if (materialStorage.Count() == 0)
             {
                 MessageBox.Show("Couldn't get the data \n" +
                     "Check your network connection and try again.");
@@ -23,7 +33,7 @@ namespace ConfluenceTableParser
             else
             {
                 int count = 1;
-                foreach (UsageMaterial usmt in usageMaterials)
+                foreach (UsageMaterial usmt in materialStorage)
                 {
                     DataGridMaterialView.Rows.Add();
                     DataGridViewRow row = DataGridMaterialView.Rows[DataGridMaterialView.Rows.GetLastRow(DataGridViewElementStates.None)];
@@ -47,7 +57,33 @@ namespace ConfluenceTableParser
 
         private void JSONExportButton_Click(object sender, EventArgs e)
         {
+            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filename = @"\ConfluenceMaterialData.json";
 
+            if (materialStorage != null)
+            {
+                StringBuilder data = new StringBuilder();
+                foreach (UsageMaterial usmt in materialStorage)
+                {
+                    data.Append(JsonSerializer.Serialize(usmt, options) + Environment.NewLine);
+                }
+
+                File.WriteAllText(filepath + filename, data.ToString());
+                MessageBox.Show("Data has been saved to file.");
+
+            }
+            else
+            {
+                MessageBox.Show("Couldn't get the data. List of materials is empty.\n" +
+                "Check your network connection and try again.");
+            }
         }
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            AllowTrailingCommas = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), // Вот эта строка поможет с кодировкой
+            WriteIndented = true
+        };
     }
 }
