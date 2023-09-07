@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
@@ -60,12 +58,30 @@ namespace ConfluenceTableParser
         {
             string filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string filename = @"\ConfluenceMaterialData.json";
+            string fullPath = filepath + filename;
 
             if (materialStorage != null)
             {
                 var data = JsonSerializer.Serialize(materialStorage, options);
-                File.WriteAllText(filepath + filename, data.ToString());
-                MessageBox.Show("Data has been saved to file.");
+
+                if (!File.Exists(fullPath))
+                {
+                    File.WriteAllText(fullPath, data.ToString());
+                    MessageBox.Show("Data has been saved to file.");
+                }
+                else
+                {
+                    var dialogResult = MessageBox.Show("File is exists. Replase?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        File.WriteAllText(fullPath, data.ToString());
+                        MessageBox.Show("Data has been saved to file.");
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.Cancel;
+                    }
+                }
 
             }
             else
