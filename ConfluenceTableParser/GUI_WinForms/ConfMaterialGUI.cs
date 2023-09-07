@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -62,12 +63,7 @@ namespace ConfluenceTableParser
 
             if (materialStorage != null)
             {
-                StringBuilder data = new StringBuilder();
-                foreach (UsageMaterial usmt in materialStorage)
-                {
-                    data.Append(JsonSerializer.Serialize(usmt, options) + Environment.NewLine);
-                }
-
+                var data = JsonSerializer.Serialize(materialStorage, options);
                 File.WriteAllText(filepath + filename, data.ToString());
                 MessageBox.Show("Data has been saved to file.");
 
@@ -81,8 +77,7 @@ namespace ConfluenceTableParser
         private static readonly JsonSerializerOptions options = new JsonSerializerOptions()
         {
             AllowTrailingCommas = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), // Вот эта строка поможет с кодировкой
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             WriteIndented = true
         };
     }
