@@ -6,7 +6,7 @@ namespace ConfluenceTableParser
     public static class MyParser
     {
         // adding url link to web page
-        private readonly static string url = "https://wiki.samoletgroup.ru/pages/viewpage.action?pageId=69965674";
+        private readonly static string url = "-";
         public static UsageMaterialStorage GetDataTable()
         {
             var config = Configuration.Default.WithDefaultLoader();
