@@ -49,9 +49,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(344, 20);
+            this.label1.Size = new System.Drawing.Size(426, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "A list of usage materials from Confluence:";
+            this.label1.Text = "Список используемых материалов из Confluence:";
             // 
             // GetDataButton
             // 
@@ -64,7 +64,7 @@
             this.GetDataButton.Name = "GetDataButton";
             this.GetDataButton.Size = new System.Drawing.Size(110, 30);
             this.GetDataButton.TabIndex = 2;
-            this.GetDataButton.Text = "Get Data";
+            this.GetDataButton.Text = "Загрузить";
             this.GetDataButton.UseVisualStyleBackColor = false;
             this.GetDataButton.Click += new System.EventHandler(this.GetDataButton_Click);
             // 
@@ -79,7 +79,7 @@
             this.JSONExportButton.Name = "JSONExportButton";
             this.JSONExportButton.Size = new System.Drawing.Size(110, 30);
             this.JSONExportButton.TabIndex = 3;
-            this.JSONExportButton.Text = "JSON Export";
+            this.JSONExportButton.Text = "Экспорт json";
             this.JSONExportButton.UseVisualStyleBackColor = false;
             this.JSONExportButton.Click += new System.EventHandler(this.JSONExportButton_Click);
             // 
@@ -123,37 +123,37 @@
             // 
             // MaterialGroupColumn
             // 
-            this.MaterialGroupColumn.HeaderText = "Group";
+            this.MaterialGroupColumn.HeaderText = "Группа";
             this.MaterialGroupColumn.MinimumWidth = 10;
             this.MaterialGroupColumn.Name = "MaterialGroupColumn";
             // 
             // MaterialTitleColumn
             // 
-            this.MaterialTitleColumn.HeaderText = "Title";
+            this.MaterialTitleColumn.HeaderText = "Имя материала";
             this.MaterialTitleColumn.MinimumWidth = 10;
             this.MaterialTitleColumn.Name = "MaterialTitleColumn";
             // 
             // MaterialNameColumn
             // 
-            this.MaterialNameColumn.HeaderText = "Name";
+            this.MaterialNameColumn.HeaderText = "Мтрл.Название";
             this.MaterialNameColumn.MinimumWidth = 10;
             this.MaterialNameColumn.Name = "MaterialNameColumn";
             // 
             // MaterialNotationColumn
             // 
-            this.MaterialNotationColumn.HeaderText = "Notation";
+            this.MaterialNotationColumn.HeaderText = "О_Материал обозначение";
             this.MaterialNotationColumn.MinimumWidth = 10;
             this.MaterialNotationColumn.Name = "MaterialNotationColumn";
             // 
             // MaterialMeasureUnitsColumn
             // 
-            this.MaterialMeasureUnitsColumn.HeaderText = "Units";
+            this.MaterialMeasureUnitsColumn.HeaderText = "О_Единицы измерения";
             this.MaterialMeasureUnitsColumn.MinimumWidth = 10;
             this.MaterialMeasureUnitsColumn.Name = "MaterialMeasureUnitsColumn";
             // 
             // MaterialUsageColumn
             // 
-            this.MaterialUsageColumn.HeaderText = "Usage";
+            this.MaterialUsageColumn.HeaderText = "Применение";
             this.MaterialUsageColumn.MinimumWidth = 10;
             this.MaterialUsageColumn.Name = "MaterialUsageColumn";
             // 
@@ -168,7 +168,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(400, 200);
             this.Name = "ConfMaterialGUI";
-            this.Text = "ConfluenceUsageMaterialData";
+            this.Text = "Confluence материалы";
             ((System.ComponentModel.ISupportInitialize)(this.DataGridMaterialView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

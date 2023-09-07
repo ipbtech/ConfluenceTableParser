@@ -26,8 +26,8 @@ namespace ConfluenceTableParser
             materialStorage = usageMaterials;
             if (materialStorage.Count() == 0)
             {
-                MessageBox.Show("Couldn't get the data \n" +
-                    "Check your network connection and try again.");
+                MessageBox.Show("Не удалось загрузить данные из Confluence. \n" +
+                    "Проверьте интернет-соединение и попробуйте еще раз.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -57,25 +57,25 @@ namespace ConfluenceTableParser
         private void JSONExportButton_Click(object sender, EventArgs e)
         {
             string filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string filename = @"\ConfluenceMaterialData.json";
+            string filename = @"\3_206_Проверить материалы.json";
             string fullPath = filepath + filename;
 
-            if (materialStorage != null)
+            if (materialStorage.Count() != 0)
             {
                 var data = JsonSerializer.Serialize(materialStorage, options);
 
                 if (!File.Exists(fullPath))
                 {
                     File.WriteAllText(fullPath, data.ToString());
-                    MessageBox.Show("Data has been saved to file.");
+                    MessageBox.Show("Данные успешно сохранены в .json файл.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    var dialogResult = MessageBox.Show("File is exists. Replase?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    var dialogResult = MessageBox.Show("Файл .json уже существует. Вы уверены, что хотите заменить его?", "Информация", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (dialogResult == DialogResult.Yes)
                     {
                         File.WriteAllText(fullPath, data.ToString());
-                        MessageBox.Show("Data has been saved to file.");
+                        MessageBox.Show("Данные успешно сохранены в .json файл.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -86,8 +86,8 @@ namespace ConfluenceTableParser
             }
             else
             {
-                MessageBox.Show("Couldn't get the data. List of materials is empty.\n" +
-                "Check your network connection and try again.");
+                MessageBox.Show("Список матреиалов пуст. \n" +
+                    "Перед экспортом необходимо сначала загрузить данные в приложение.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private static readonly JsonSerializerOptions options = new JsonSerializerOptions()
