@@ -60,7 +60,7 @@ namespace ConfluenceTableParser
             string filename = @"\3_206_Проверить материалы.json";
             string fullPath = filepath + filename;
 
-            if (materialStorage.Count() != 0)
+            if (materialStorage != null && materialStorage.Count() != 0)
             {
                 var data = JsonSerializer.Serialize(materialStorage, options);
 
@@ -86,15 +86,25 @@ namespace ConfluenceTableParser
             }
             else
             {
-                MessageBox.Show("Список матреиалов пуст. \n" +
+                MessageBox.Show("Список материалов пуст. \n" +
                     "Перед экспортом необходимо сначала загрузить данные в приложение.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private static readonly JsonSerializerOptions options = new JsonSerializerOptions()
         {
             AllowTrailingCommas = true,
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            //Encoder = JavaScriptEncoder.Create(GetEncoderSettings()),
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             WriteIndented = true
         };
+        private static TextEncoderSettings GetEncoderSettings()
+        {
+            var encoder = new TextEncoderSettings();
+            //encoder.AllowCharacters('\u00A0');
+            encoder.ForbidCharacters('\u00A0');
+            encoder.AllowRanges(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic);
+            return encoder;
+        }
     }
 }
