@@ -56,7 +56,7 @@ namespace ConfluenceTableParser
 
         private void JSONExportButton_Click(object sender, EventArgs e)
         {
-            string filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filepath = @"G:\BIM\SHARED\02_REVIT\04_Плагины\Настройки\Проверить модель\3_206_Проверить материалы";
             string filename = @"\3_206_Проверить материалы.json";
             string fullPath = filepath + filename;
 
@@ -66,8 +66,15 @@ namespace ConfluenceTableParser
 
                 if (!File.Exists(fullPath))
                 {
-                    File.WriteAllText(fullPath, data.ToString());
-                    MessageBox.Show("Данные успешно сохранены в .json файл.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        File.WriteAllText(fullPath, data.ToString());
+                        MessageBox.Show("Данные успешно сохранены в .json файл.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (DirectoryNotFoundException ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
                 }
                 else
                 {
